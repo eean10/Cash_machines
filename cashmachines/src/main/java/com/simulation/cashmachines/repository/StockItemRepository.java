@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import com.simulation.cashmachines.entity.StockItem;
 
 @Repository
-public interface StockItemRepository extends JpaRepository<StockItem, Long> {
+public interface StockItemRepository extends JpaRepository<StockItem, String> {
     
 }

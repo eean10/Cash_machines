@@ -23,11 +23,16 @@ public class StockItem{
 
     public String getBarcode() {
         return barcode;
-    }   
+    }
+    
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
 
     public LocalDate getValidFrom() {
         return validFrom;
     }         
+
 
     public void setValidFrom(LocalDate validFrom) {
         this.validFrom = validFrom;

@@ -8,10 +8,26 @@ public class ReceiptBodyItem {
     private Integer quantity;
     private Double subtotal;
 
+    public ReceiptBodyItem(String barcode, String name, Integer quantity, Double sellingPrice, Double discount) {
+        this.barcode = barcode;
+        this.name = name;
+        this.pricePerUnit = sellingPrice;
+        this.discount = discount;
+        this.quantity = quantity;
+        this.subtotal = this.pricePerUnit * quantity - discount;
+    }
+
+
+    public ReceiptBodyItem(String barcode, String name, Integer quantity, Double sellingPrice) {
+        this(barcode, name, quantity, sellingPrice, 0.0);
+    }
+
+
     //getters and setters
     public String getBarcode() {
         return barcode;
     }
+
 
     public void setBarcode(String barcode) {
         this.barcode = barcode;
@@ -55,5 +71,14 @@ public class ReceiptBodyItem {
 
     public void setSubtotal(Double subtotal) {
         this.subtotal = subtotal;
+    }
+
+    public void applyDiscount(Double discount) {
+        this.discount = discount;
+        this.calculateSubtotal();
+    }
+
+    public void calculateSubtotal() {
+        this.subtotal = this.pricePerUnit * this.quantity - this.discount;
     }
 }

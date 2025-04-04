@@ -1,3 +1,10 @@
-class ProductRepository extends JpaRepository<Product, Long>{
+package com.simulation.cashmachines.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import com.simulation.cashmachines.entity.Product;
+
+@Repository
+public interface ProductRepository extends JpaRepository<Product, String> {
     
 }
