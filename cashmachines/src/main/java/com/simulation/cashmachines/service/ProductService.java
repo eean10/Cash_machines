@@ -29,9 +29,9 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public Product updateProduct(String id, Product product) {
-        if (productRepository.existsById(id)) {
-            product.setBarcode(id);
+    public Product updateProduct(String barcode, Product product) {
+        if (productRepository.existsById(barcode)) {
+            product.setBarcode(barcode);
             return productRepository.save(product);
         }
         throw new RuntimeException("Product not found");

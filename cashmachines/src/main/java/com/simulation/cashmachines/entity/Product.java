@@ -14,7 +14,7 @@ public class Product {
     private String barcode;
 
     private String name; 
-    private Double weight;
+    private Double measure;
     @Enumerated(EnumType.STRING)
     private Unit unit;  
     @Enumerated(EnumType.STRING)
@@ -38,12 +38,12 @@ public class Product {
         this.name = name;
     }
 
-    public Double getWeight() {
-        return weight;
+    public Double getMeasure() {
+        return measure;
     }
 
-    public void setWeight(Double weight) {
-        this.weight = weight;
+    public void setMeasure(Double measure) {
+        this.measure = measure;
     }
 
     public Unit getUnit() {

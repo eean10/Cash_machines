@@ -3,7 +3,11 @@ import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.simulation.cashmachines.converter.ReceiptBodyConverter;
+
 import jakarta.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
@@ -17,6 +21,8 @@ public class Receipt{
 
     @Id
     private Long id;
+    @Column(columnDefinition = "jsonb")
+    @Convert(converter = ReceiptBodyConverter.class)
     private Map<String, ReceiptBodyItem> body = null;
     private Double total = 0.0;
     private final LocalDateTime timestamp = LocalDateTime.now();
