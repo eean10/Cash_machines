@@ -69,5 +69,6 @@ public class StockItem{
     public void setAvailability(Integer availability) {
         this.availability = availability;
     }
+    
 }
 
