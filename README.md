@@ -7,4 +7,5 @@
 3. tabelle \dt
 
 
-Schede di chat, c
+
+I prodotti funzionano bene, sistemare il body dello scontrino. eliminare il converter

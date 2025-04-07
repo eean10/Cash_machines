@@ -42,8 +42,6 @@ public class StockItemService {
         stockItemRepository.deleteById(barcode);
     }
  
-
-    //todo: fix
     //replace quantity in stock
     public void updateStock(Map<String, Integer> items) {
         for (Map.Entry<String, Integer> entry : items.entrySet()) {
@@ -62,7 +60,7 @@ public class StockItemService {
             stockItemRepository.save(stockItem);
         }
         else{
-            throw new RuntimeException("Quantity not available");
+            throw new RuntimeException("Quantity not available for item " + barcode);
         }
             
     }

@@ -1,14 +1,17 @@
 package com.simulation.cashmachines.entity;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import com.simulation.cashmachines.converter.ReceiptBodyConverter;
+import org.hibernate.annotations.Type;
 
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
@@ -20,15 +23,24 @@ public class Receipt{
     private final String header = "Find the right header - shop";
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(columnDefinition = "jsonb")
-    @Convert(converter = ReceiptBodyConverter.class)
-    private Map<String, ReceiptBodyItem> body = null;
+    //@Column(columnDefinition = "jsonb")
+    //todo : capire perché non gli piace sta cosa
+    @Type(type = "jsonb")
+    private Map<String, ReceiptBodyItem> body;
     private Double total = 0.0;
     private final LocalDateTime timestamp = LocalDateTime.now();
 
     @Transient
     private final String footer = "Find the right footer - shop";
+
+    @PrePersist
+    public void prePersist() {
+        if (body == null) {
+            body = new HashMap<>();  // Se body è null, inizializzalo con una mappa vuota
+        }
+    }
 
     //getters and setters
     public Long getId() {
@@ -73,7 +85,6 @@ public class Receipt{
         return header + "\n" + id + "\n" + bodyToString() + "\n" + total + "\n" + footer;
     }    
 
-    //todo : devoa ggiungere le funzioni di add e remove item/S??
     private String bodyToString() {
         if (body == null) return "";
 
