@@ -55,9 +55,6 @@ public class ReceiptService {
     public Receipt updateReceipt(Long id, String barcode, Integer quantity, Boolean addOrRemove) {
         if (receiptRepository.existsById(id)) {
             Receipt receipt = receiptRepository.findById(id).get();
-//todo : capire se quando modifico qui le cose si modifica anche il db o no
-
-//todo : testare il collegamento con il db
             receipt.setId(id);
             if (addOrRemove) {
                 stockItemService.updateAvailability(barcode, quantity);
@@ -67,7 +64,7 @@ public class ReceiptService {
                 // (bought? how many?) then you update the stock
                 //when adding you need to check the stock first
                 receipt.removeItems(buildReceiptBodyItem(barcode, quantity));
-                stockItemService.updateAvailability(barcode, quantity);           
+                stockItemService.updateAvailability(barcode, -quantity);           
             } 
             return receiptRepository.save(receipt);
         }

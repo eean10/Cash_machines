@@ -3,10 +3,13 @@ package com.simulation.cashmachines.entity;
 public class ReceiptBodyItem {
     private String barcode;
     private String name;
-    private Double pricePerUnit;
-    private Double discount;
-    private Integer quantity;
-    private Double subtotal;
+    private Double pricePerUnit = 0.0;
+    private Double discount = 0.0;
+    private Integer quantity = 0;
+    private Double subtotal = 0.0;
+
+    //needed to add because of controller -> add and remove
+    public ReceiptBodyItem(){}
 
     public ReceiptBodyItem(String barcode, String name, Integer quantity, Double sellingPrice, Double discount) {
         this.barcode = barcode;
@@ -63,6 +66,7 @@ public class ReceiptBodyItem {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+        calculateSubtotal();
     }
 
     public Double getSubtotal() {

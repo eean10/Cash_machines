@@ -13,6 +13,7 @@ import java.util.List;
 
 import com.simulation.cashmachines.dto.ProductSalesDTO;
 import com.simulation.cashmachines.entity.Receipt;
+import com.simulation.cashmachines.entity.ReceiptBodyItem;
 import com.simulation.cashmachines.entity.Section;
 import com.simulation.cashmachines.service.ReceiptService;
 
@@ -48,19 +49,19 @@ public class ReceiptController{
     }
 
     @PutMapping("/receipts/{id}/add_item/{barcode}")
-    public Receipt updateReceiptAddItem(@PathVariable Long id, @RequestBody String barcode, @RequestBody Integer quantity) {
+    public Receipt updateReceiptAddItem(@PathVariable Long id, @RequestBody ReceiptBodyItem item ) {
         System.out.println("Receipt id: " + id);
         System.out.println("Receipt: ");
-        Receipt receipt = receiptService.updateReceipt(id, barcode, quantity, true);
+        Receipt receipt = receiptService.updateReceipt(id, item.getBarcode(), item.getQuantity(), true);
         System.out.println(receipt.toString());
         return receipt;
     }
 
     @PutMapping("/receipts/{id}/remove_item/{barcode}")
-    public Receipt updateReceiptRemoveItem(@PathVariable Long id, @RequestBody String barcode, @RequestBody Integer quantity) {
+    public Receipt updateReceiptRemoveItem(@PathVariable Long id, @RequestBody ReceiptBodyItem item) {
         System.out.println("Receipt id: " + id);
         System.out.println("Receipt: ");
-        Receipt receipt = receiptService.updateReceipt(id, barcode, quantity, true);
+        Receipt receipt = receiptService.updateReceipt(id, item.getBarcode(), item.getQuantity(), false);
         System.out.println(receipt.toString());
         return receipt;
     }

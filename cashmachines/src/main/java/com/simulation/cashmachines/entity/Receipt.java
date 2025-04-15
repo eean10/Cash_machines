@@ -89,6 +89,13 @@ public class Receipt{
         return header + "\n" + id + "\n" + bodyToString() + "\n" + total + "\n" + footer;
     }    
 
+    private void calculateTotal(){
+        if (body == null || body.isEmpty()) setTotal(0.0);
+        setTotal(body.values().stream()
+               .mapToDouble(ReceiptBodyItem::getSubtotal)
+               .sum());
+    }
+
     private String bodyToString() {
         if (body == null) return "";
 
@@ -108,15 +115,17 @@ public class Receipt{
         else {
             body.put(barcode, receiptBodyItem); 
         }
+        calculateTotal();
     }
 
     public void removeItems(ReceiptBodyItem receiptBodyItem) {
         String barcode = receiptBodyItem.getBarcode();
         if (body.get(barcode) != null) {
-            Integer currentQuantity = body.get(barcode).getQuantity();
-            Integer newQuantity = receiptBodyItem.getQuantity();
-            if (currentQuantity >= newQuantity){
-               body.get(barcode).setQuantity(newQuantity); 
+            Integer currentQuantity = body.get(barcode).getQuantity(); //from receipt
+            Integer quantityToRemove = receiptBodyItem.getQuantity(); //number i want to remove
+            if (currentQuantity >= quantityToRemove){
+                body.get(barcode).setQuantity(currentQuantity - quantityToRemove);
+                calculateTotal();
             }
             else {
                 throw new RuntimeException("Not possible: you can remove " + currentQuantity + " item(s) at most");
