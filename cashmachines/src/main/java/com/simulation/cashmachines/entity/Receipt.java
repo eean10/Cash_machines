@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.hibernate.annotations.Type;
 
+import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Column;
@@ -25,10 +26,13 @@ public class Receipt{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //@Column(columnDefinition = "jsonb")
+    
     //todo : capire perché non gli piace sta cosa
-    @Type(type = "jsonb")
+
+    @Type(JsonType.class)
+    @Column( columnDefinition = "jsonb")
     private Map<String, ReceiptBodyItem> body;
+    
     private Double total = 0.0;
     private final LocalDateTime timestamp = LocalDateTime.now();
 
