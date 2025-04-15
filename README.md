@@ -7,8 +7,10 @@
 3. tabelle \dt
 
 
-
-
 https://www.baeldung.com/spring-boot-jpa-storing-postgresql-jsonb
 https://github.com/vladmihalcea/hypersistence-utils?tab=readme-ov-file#installation-guide qui per la versione di hypersistance per la mappatura
 
+Le funzioni sembrano funzionare.
+
+Da capire che cosa aggiungere. Scrivere documentazione e rivedere su notion le altre idee che c'erano
+Aggiungere fe?
